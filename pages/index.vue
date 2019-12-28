@@ -43,7 +43,7 @@
       <span class="caption" v-else>計算式は正常です</span>
     </v-row>
 
-    <v-row align="end" justify="center" style="height:950%;">
+    <v-row align="end" justify="center" style="height:85%;">
       <table>
         <tr>
           <td>

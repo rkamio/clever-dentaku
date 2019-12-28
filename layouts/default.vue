@@ -52,7 +52,7 @@
         <v-icon>mdi-history</v-icon>
       </v-btn>
     </v-bottom-navigation>
-    <v-footer app>
+    <v-footer app v-else>
       <v-col　class="text-center"　cols="12"> &copy; {{ new Date().getFullYear() }} - rkamy </v-col>
     </v-footer>
   </v-app>
