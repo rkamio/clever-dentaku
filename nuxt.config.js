@@ -83,5 +83,11 @@ export default {
     */
     extend (config, ctx) {
     }
-  }
+  },
+  /*
+  ** Plugins
+  */
+  plugins: [
+    { src: "~/plugins/vue2-touch-events.js", ssr: false }
+  ]
 }
