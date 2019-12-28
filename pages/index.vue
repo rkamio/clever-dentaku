@@ -1,19 +1,19 @@
 <template>
   <v-container fluid v-touch:swipe.left="() => { if($vuetify.breakpoint.xs) $router.push('/operation-history') }">
-    <v-row justify="start" align="center" style="height:50px;">
+    <v-row justify="start" style="height:5%;">
       <h3>計算欄</h3>
       <v-spacer></v-spacer>
       <h3>{{ fomula }}</h3>
-      <v-row class="ma-2" justify="end" align="center">
-        <v-btn right @click="backSpace()">
-          <span class="font-weight-bold display-1">⬅︎</span>
+      <v-row class="ma-2" justify="end">
+        <v-btn x-small right @click="backSpace()">
+          <span class="font-weight-bold">⬅︎</span>
         </v-btn>
       </v-row>
     </v-row>
-    <v-row align="center">
+    <v-row>
       <v-divider></v-divider>
     </v-row>
-    <v-row justify="start" align="center" style="height:10px;">
+    <v-row align="center" justify="start"style="height:5%;">
       <h3>変換結果</h3>
       <v-spacer></v-spacer>
       <h3>{{ fomula }}</h3>
@@ -38,11 +38,12 @@
       </v-row>
     </v-row>
 
-    <v-row align="end" justify="center" style="height:100px;">
-      <p class="error--text">{{ errorMessage }}</p>
+    <v-row justify="center" style="height:5%;">
+      <span class="caption error--text" v-if="errorMessage">{{ errorMessage }}</span>
+      <span class="caption" v-else>計算式は正常です</span>
     </v-row>
 
-    <v-row align="end" justify="center" style="height:430px;">
+    <v-row align="end" justify="center" style="height:950%;">
       <table>
         <tr>
           <td>
@@ -206,7 +207,7 @@ export default {
     return {
       selectUnitdialog: false,
       fomula: '',
-      errorMessage: '',
+      errorMessage: null,
     };
   },
   methods: {
@@ -216,6 +217,7 @@ export default {
       }
       this.fomula+=expression;
       console.log(this.fomula);
+      console.log()
     },
     parseFomula: function(expression) {
       let fomula = this.fomula.replace(/÷/g,'/');
