@@ -37,7 +37,7 @@
       </v-container>
     </v-content>
 
-    <v-bottom-navigation app :value="activeBtn" grow color="teal" v-if="$vuetify.breakpoint.xs">
+    <v-bottom-navigation app :value="activeBtn" grow color="teal" v-if="$vuetify.breakpoint.xs" max-height="50px">
       <v-btn @click="$router.push('/')">
         <span>電卓</span>
         <v-icon>mdi-calculator</v-icon>

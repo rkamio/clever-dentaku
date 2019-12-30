@@ -210,12 +210,12 @@
 import UnitList from "~/components/UnitList.vue";
 export default {
   head: {
-    // htmlAttrs:{
-    //   class:'lock-scroll'
-    // },
-    // bodyAttrs:{
-    //   class: 'lock-scroll'
-    // }
+    htmlAttrs:{
+      class:'lock-scroll'
+    },
+    bodyAttrs:{
+      class: 'lock-scroll'
+    }
   },
   data() {
     return {
