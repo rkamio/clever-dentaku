@@ -48,7 +48,7 @@
     </v-row>
 
     <!-- 電卓部分 -->
-    <v-row align="end" justify="center" style="height:85%;">
+    <v-row align="end" justify="center" v-bind:style="{height:windowHeight*0.7+'px'}">
       <table>
         <tr>
           <td>
@@ -224,6 +224,7 @@ export default {
       calculatedResult: '',
       convertedResult: '',
       errorMessage: null,
+      windowHeight:window.innerHeight
     }
   },
   methods: {
@@ -239,6 +240,7 @@ export default {
       return parsedFomula;
     },
     calculate: function() {
+      console.log(this.windowHeight);
       try {
         if (this.fomula !== '') {
          const parsedFomula = this.parseFomula(this.fomula);

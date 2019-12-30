@@ -1,11 +1,11 @@
 <template>
   <v-app dark>
-    <v-app-bar fixed app>
+    <v-app-bar fixed app v-if="!$vuetify.breakpoint.xs">
       <v-toolbar-title>
-        <h1 class="white--text font-weight-bold">電卓</h1>
+        <h2 class="white--text font-weight-bold">電卓</h2>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon>
+      <v-btn small icon>
         <v-icon>mdi-account-circle</v-icon>
       </v-btn>
       <v-app-bar-nav-icon v-if="!$vuetify.breakpoint.xs" @click.stop="rightDrawer = !rightDrawer"></v-app-bar-nav-icon>
@@ -46,6 +46,10 @@
         <span>履歴</span>
         <v-icon>mdi-history</v-icon>
       </v-btn>
+      <v-btn @click="$router.push('/users/')">
+        <span>その他</span>
+        <v-icon>mdi-account</v-icon>
+      </v-btn>
     </v-bottom-navigation>
     <v-footer app v-else>
       <v-col　class="text-center"　cols="12"> &copy; {{ new Date().getFullYear() }} - rkamy </v-col>
@@ -55,7 +59,7 @@
 
 <script>
 import OperationHistoryList from "~/components/OperationHistoryList.vue"
-const pathList = {"index":0,"operation-history":1}
+const pathList = {"index":0,"operation-history":1,"users":2}
 
 export default {
   data () {
