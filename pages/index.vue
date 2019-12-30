@@ -48,7 +48,7 @@
     </v-row>
 
     <!-- 電卓部分 -->
-    <v-row align="end" justify="center" v-bind:style="{height:windowHeight*0.7+'px'}">
+    <v-row align="end" justify="center" style="height:85%">
       <table>
         <tr>
           <td>
@@ -223,8 +223,7 @@ export default {
       fomula: '',
       calculatedResult: '',
       convertedResult: '',
-      errorMessage: null,
-      windowHeight:window.innerHeight
+      errorMessage: null
     }
   },
   methods: {
