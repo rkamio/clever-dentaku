@@ -211,7 +211,7 @@ import UnitList from "~/components/UnitList.vue";
 export default {
   head: {
     htmlAttrs:{
-      class:'lock-scroll'
+      class:'lock-scroll lock-doublezoom',
     },
     bodyAttrs:{
       class: 'lock-scroll'
@@ -303,9 +303,13 @@ export default {
 </script>
 
 <style>
-/* scroll規制 */
+/* scroll抑止 */
 .lock-scroll {
   overflow:hidden;
+}
+/* ダブルタップによるズーム抑止 */
+.lock-doublezoom {
+  touch-action: manipulation;
 }
 table {
   border-collapse: separate;
