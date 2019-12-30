@@ -1,16 +1,19 @@
 <template>
   <v-container>
-    <v-list three-line>
+    <v-list three-line v-if="items.length > 0">
       <template v-for="(item, index) in items">
-        <v-divider v-if="index !== 0 && index !== items.lnegth - 1" :key="index"></v-divider>
-        <v-list-item :key="item.title" @click="">
+        <v-divider v-if="index !== 0 && index !== items.length - 1" :key="index"></v-divider>
+        <v-list-item :key="item.calculation" @click="">
           <v-list-item-content>
-            <v-list-item-title v-html="item.title"></v-list-item-title>
-            <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
+            <v-list-item-title v-if="item.fomula!==''">{{ '計算式 : ' + item.fomula + '=' + item.calculatedResult }}</v-list-item-title>
+            <v-list-item-subtitle v-if="item.convertedResult !== ''"> 
+              {{ item.calculatedResult + ' = ' + item.convertedResult + ' (' +item.convertTo + ')' }}
+            </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </template>
     </v-list>
+    <p v-else>現在、履歴はありません。</p>
   </v-container>
 </template>
 
@@ -18,34 +21,8 @@
 export default {
   data() {
     return {
-      items: [
-        {
-          title: "Brunch this weekend?",
-          subtitle:
-            "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-        },
-        {
-          title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-          subtitle:
-            "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend."
-        },
-        {
-          title: "Oui oui",
-          subtitle:
-            "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?"
-        },
-        {
-          title: "Birthday gift",
-          subtitle:
-            "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?"
-        },
-        {
-          title: "Recipe to try",
-          subtitle:
-            "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos."
-        }
-      ]
+      items: this.$store.state.history.operationHistory
     };
   }
-};
+}
 </script>

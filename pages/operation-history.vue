@@ -9,9 +9,12 @@
 import OperationHistoryList from "~/components/OperationHistoryList.vue"
 
 export default {
-
   components: {
     OperationHistoryList
   }
 }
 </script>
+
+<style>
+
+</style>

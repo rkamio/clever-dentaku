@@ -14,11 +14,6 @@
       <v-list>
         <v-list-item @click.stop="rightDrawer = !rightDrawer">
           <v-list-item-title>履歴</v-list-item-title>
-          <v-list-item-action>
-            <v-icon>
-              mdi-close
-            </v-icon>
-          </v-list-item-action>
         </v-list-item>
         <OperationHistoryList />
       </v-list>
