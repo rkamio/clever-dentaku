@@ -1,17 +1,24 @@
 rules_version = '2';
 service cloud.firestore {
-  match /databases/{database}/documents {
+  function isModified(key) {
+  	return request.resource.data[key] != resource.data[key];
+  }
 
-    // This rule allows anyone on the internet to view, edit, and delete
-    // all data in your Firestore database. It is useful for getting
-    // started, but it is configured to expire after 30 days because it
-    // leaves your app open to attackers. At that time, all client
-    // requests to your Firestore database will be denied.
-    //
-    // Make sure to write security rules for your app before that time, or else
-    // your app will lose access to your Firestore database
-    match /{document=**} {
-      allow read, write: if request.time < timestamp.date(2020, 1, 26);
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+    match /units/{unitId} {
+    	allow read;
+      allow update : if request.resource.data.keys().hasOnly(["favoriteCount","category","name","perUnit","createdBy","unit","createdAt"])
+      							  && !isModified("category")
+                      && !isModified("name")
+                      && !isModified("perUnit")
+                      && !isModified("createdBy")
+                      && !isModified("unit")
+                      && !isModified("createdAt")
+                      && request.resource.data.favoriteCount is int
+                      && request.auth.uid != null;
     }
   }
 }

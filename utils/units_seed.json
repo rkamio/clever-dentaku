@@ -1,0 +1,190 @@
+[
+  {
+    "name": "テスト",
+    "perUnit":0.01,
+    "unit":"",
+    "category":"確率",
+    "favoriteCount":6,
+    "createdBy":"iefnikoemdock",
+    "createdAt":"2019-01-01 00:00:00"
+  },
+  {
+    "name": "東京ドーム",
+    "perUnit":46.755,
+    "unit":"平方メートル",
+    "category": "面積",
+    "favoriteCount": 24,
+    "createdBy":"io4rjiejfnonf",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "スカイツリー",
+    "perUnit":634,
+    "unit":"m",
+    "category": "高さ",
+    "favoriteCount": 37,
+    "createdBy":"lkrenfkmre",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "日本の人口",
+    "perUnit":126800000,
+    "unit":"人",
+    "category": "個数",
+    "favoriteCount": 23,
+    "createdBy":"ojemfmdsmkfmo",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "コイントス連続表",
+    "perUnit":0.5,
+    "unit":"連続試行",
+    "category": "確率",
+    "favoriteCount": 67,
+    "createdBy":"iejifwpeokfir",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "サイコロ連続１の目",
+    "perUnit":0.166,
+    "unit":"連続試行",
+    "category":"確率",
+    "favoriteCount": 49,
+    "createdBy":"ejwfopkefm",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "日本の国家予算",
+    "perUnit":101456400000000,
+    "unit":"円",
+    "category": "金額",
+    "favoriteCount": 94,
+    "createdBy":"pjfefwmemld",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "フェラーリ",
+    "perUnit":30000000,
+    "unit":"円",
+    "category": "金額",
+    "favoriteCount": 98,
+    "createdBy":"rjfkorpfmom",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "新幹線",
+    "perUnit":285,
+    "unit":"km/h",
+    "category": "速さ",
+    "favoriteCount": 87,
+    "createdBy":"weroinfipwkf",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "白鵬",
+    "perUnit":154,
+    "unit":"kg",
+    "category": "重さ",
+    "favoriteCount": 51,
+    "createdBy":"ienfijiromfoc",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "KitKat",
+    "perUnit":518.4,
+    "unit":"kcal",
+    "category": "カロリー",
+    "favoriteCount": 65,
+    "createdBy":"wojerfokwopemf",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "ピカチュウ",
+    "perUnit":100000,
+    "unit":"v",
+    "category": "ボルト",
+    "favoriteCount": 65,
+    "createdBy":"rfopwkefkod",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "iphone 8",
+    "perUnit":148,
+    "unit":"g",
+    "category": "重さ",
+    "favoriteCount": 65,
+    "createdBy":"ojeifkiesmmf",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "A4用紙の長い方",
+    "perUnit":297,
+    "unit":"mm",
+    "category": "長さ",
+    "favoriteCount": 65,
+    "createdBy":"jfijefimofo,",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "1インチ",
+    "perUnit":2.54,
+    "unit":"cm",
+    "category":"基本",
+    "favoriteCount":6,
+    "createdBy":"eijnfmioepof,",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "宝くじ",
+    "perUnit":0.00000005,
+    "unit":"",
+    "category":"確率",
+    "favoriteCount":6,
+    "createdBy":"iejrowkpef",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "宝くじ",
+    "perUnit":0.00000005,
+    "unit":"連続試行",
+    "category":"確率",
+    "favoriteCount":6,
+    "createdBy":"iefnikoemdock",
+    "createdAt":"2019-12-31 10:00:00"
+  },
+  {
+    "name": "消費支出(２人以上世帯)",
+    "perUnit":279671,
+    "unit":"円/月",
+    "category":"金額",
+    "favoriteCount":16,
+    "createdBy":"rkmwrmfltg",
+    "createdAt":"2020-01-01 13:00:00"
+  },{
+    "name": "実収入(2人以上世帯)",
+    "perUnit":536075,
+    "unit":"円/月",
+    "category":"金額",
+    "favoriteCount":32,
+    "createdBy":"rofekmfdfres",
+    "createdAt":"2019-01-01 14:06:00"
+  },
+  {
+    "name": "娯楽費(2人以上世帯)",
+    "perUnit":27958,
+    "unit":"円/月",
+    "category":"金額",
+    "favoriteCount":34,
+    "createdBy":"erjtkerfrlg",
+    "createdAt":"2019-01-01 10:00:00"
+  },
+  {
+    "name": "りんご",
+    "perUnit":295.6,
+    "unit":"g",
+    "category":"重さ",
+    "favoriteCount":0,
+    "createdBy":"irofwmofmsm",
+    "createdAt":"2019-01-01 17:00:00"
+  }
+]

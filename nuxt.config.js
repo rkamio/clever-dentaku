@@ -88,6 +88,9 @@ export default {
   ** Plugins
   */
   plugins: [
-    { src: "~/plugins/vue2-touch-events.js", ssr: false }
+    { src: '~/plugins/vue2-touch-events.js', ssr: false },
+    { src: '~/plugins/firebase.js', ssr: false},
+    { src: '~/plugins/auth.js', ssr: false},
+    { src: '~/plugins/db.js', ssr: false},
   ]
 }

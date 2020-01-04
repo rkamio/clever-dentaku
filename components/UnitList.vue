@@ -1,6 +1,16 @@
 <template>
   <v-container>
     <div>
+      <v-banner sticky v-if="signInAlert">
+        <v-alert v-model="signInAlert" dismissible dense outlined type="error">
+          「お気に入り」を利用するにはログインしてください。
+        </v-alert>
+      </v-banner>
+      <v-banner sticky v-if="favoriteCountAlert">
+        <v-alert v-model="favoriteCountAlert" dismissible dense outlined type="error">
+          「お気に入り」数の上限を超えています。
+        </v-alert>
+      </v-banner>
       <v-text-field v-model="search" label="検索" single-line hide-details></v-text-field>
       <br/>
       <v-data-table 
@@ -9,13 +19,14 @@
         :search="search" 
         :page.sync="page" 
         :items-per-page="itemsPerPage" 
+        :loading="loading"
         hide-default-footer 
         @page-count="pageCount=$event"
         no-data-text="現在、データがありません。"
         no-results-text="見つかりませんでした。"
       >
         <template v-slot:item.name="{ item }">
-          <v-btn @click="setUnit(item)">{{ item.name }}</v-btn>
+          <v-btn @click="$emit('unit',item)">{{ item.name }}</v-btn>
         </template>
         <template v-slot:item.isFavorite="{ item }">
           <v-btn text icon @click="editFavorite(item)">
@@ -32,12 +43,15 @@
 </template>
 
 <script>
+  import db from '~/plugins/db.js'
+  
   export default {
     data () {
       return {
         page: 1,
         pageCount: 0,
-        itemsPerPage: 10,
+        itemsPerPage: parseInt(process.env.USER_FAV_MAX),
+        loading: true,
         search: '',
         headers: [
           { text: '名前', value: 'name' },
@@ -45,149 +59,76 @@
           { text: '単位系', value: 'unit' },
           { text: 'カテゴリ', value: 'category' },
           { text: 'スター', value: 'isFavorite' },
-          { text: 'スター数', value: 'starCount' },
+          { text: 'スター数', value: 'favoriteCount' },
         ],
-        units: [
-          {
-            name: '東京ドーム',
-            perUnit:46.755,
-            unit:'平方メートル',
-            category: '面積',
-            isFavorite: false,
-            starCount: 24,
-          },
-          {
-            name: 'スカイツリー',
-            perUnit:634,
-            unit:'m',
-            category: "高さ",
-            isFavorite: false,
-            starCount: 37,
-          },
-          {
-            name: '日本の人口',
-            perUnit:126800000,
-            unit:'人',
-            category: "個数",
-            isFavorite: true,
-            starCount: 23,
-          },
-          {
-            name: 'コイントス連続表',
-            perUnit:0.5,
-            unit:'連続試行',
-            category: "確率",
-            isFavorite: true,
-            starCount: 67,
-          },
-          {
-            name: 'サイコロ連続１の目',
-            perUnit:0.166,
-            unit:'連続試行',
-            category:"確率",
-            isFavorite: false,
-            starCount: 49,
-          },
-          {
-            name: '日本の国家予算',
-            perUnit:101456400000000,
-            unit:'円',
-            category: "金額",
-            isFavorite: true,
-            starCount: 94,
-          },
-          {
-            name: 'フェラーリ',
-            perUnit:30000000,
-            unit:'円',
-            category: "金額",
-            isFavorite: false,
-            starCount: 98,
-          },
-          {
-            name: '新幹線',
-            perUnit:285,
-            unit:'km/h',
-            category: "速さ",
-            isFavorite: false,
-            starCount: 87,
-          },
-          {
-            name: '白鵬',
-            perUnit:154,
-            unit:'kg',
-            category: "重さ",
-            isFavorite: false,
-            starCount: 51,
-          },
-          {
-            name: 'KitKat',
-            perUnit:518.4,
-            unit:'kcal',
-            category: "カロリー",
-            isFavorite: false,
-            starCount: 65,
-          },
-          {
-            name: 'ピカチュウ',
-            perUnit:100000,
-            unit:'v',
-            category: "ボルト",
-            isFavorite: false,
-            starCount: 65,
-          },
-          {
-            name: 'iphone 8',
-            perUnit:148,
-            unit:'g',
-            category: "重さ",
-            isFavorite: false,
-            starCount: 65,
-          },
-          {
-            name: 'A4用紙の長い方',
-            perUnit:297,
-            unit:'mm',
-            category: "長さ",
-            isFavorite: false,
-            starCount: 65,
-          },
-          {
-            name: '1インチ',
-            perUnit:2.54,
-            unit:'cm',
-            category:'基本',
-            isFavorite:false,
-            starCount:6,
-          },
-          {
-            name: '宝くじ',
-            perUnit:0.00000005,
-            unit:'',
-            category:'確率',
-            isFavorite:false,
-            starCount:6,
-          },
-          {
-            name: '宝くじ',
-            perUnit:0.00000005,
-            unit:'連続試行',
-            category:'確率',
-            isFavorite:false,
-            starCount:6,
-          }
-        ],
+        units:[],
+        signInAlert: false,
+        favoriteCountAlert: false,
       }
     },
+    created() {
+      console.log("created UnitList.");
+      this.loadUnits();
+      
+    },
     methods: {
-      editFavorite (item) {
-        const editedIndex = this.units.indexOf(item)
-        this.units[editedIndex].isFavorite = !this.units[editedIndex].isFavorite
+      /* TODO: serverside pagination, serverside sort */
+      loadUnits: function() {
+        const favorites = this.$store.state.users.favorites;
+        db.collection("units")
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              let unitData = doc.data();
+              unitData["unitId"] = doc.id;
+              unitData["isFavorite"] = favorites.indexOf(doc.id) > -1 ? true : false ; 
+              this.units.push(unitData);
+            })
+            console.log("loadUnits success.");
+            console.log(this.units);
+            this.loading = false ;
+          })
+          .catch((err)=>{
+            console.error(err);
+            this.loading = false;
+          })
       },
-      setUnit (item) {
-        this.$store.commit("convert/setUnit",item);
-        this.$store.commit("convert/closeDialog");
-      }
+      editFavorite: function(item) {
+        if (!this.$store.state.users.isAuthorized) {
+          this.signInAlert = true;
+          return ;
+        }
+
+        const editedIndex = this.units.indexOf(item);
+        if (this.units[editedIndex].isFavorite) {
+          this.$store.dispatch('users/cancelFavorite',item);
+          this.favoriteCountAlert = false;
+          /* NOTE: 表示高速化 */
+          this.units[editedIndex].favoriteCount -= 1;
+          this.units[editedIndex].isFavorite = false;
+        } else {
+          this.$store.dispatch('users/addFavorite',item)
+            .then(result => {
+              console.log('success');
+            })
+            .catch(error => {
+              if (error === 'FavoriteCountExceedException') {
+                this.favoriteCountAlert = true;
+              }
+              console.error(error);
+              /* ロールバック */
+              this.units[editedIndex].favoriteCount -= 1;
+              this.units[editedIndex].isFavorite = false;
+            })
+          /* NOTE: 表示高速化 */
+          this.units[editedIndex].favoriteCount += 1;
+          this.units[editedIndex].isFavorite = true;
+        }
+      },
     }
   }
 </script>
+
+<style>
+
+</style>

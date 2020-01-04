@@ -15,27 +15,27 @@
       <v-divider></v-divider>
     </v-row>
     <v-row align="center" justify="start" style="height:5%;">
-      <h5 v-if="$store.state.convert.selectedUnit">
-        {{ $store.state.convert.selectedUnit.name}}
-        <div class="text-right">{{'(' + $store.state.convert.selectedUnit.unit + ')'}}</div>
+      <h5 v-if="selectedUnit">
+        {{ selectedUnit.name}}
+        <div class="text-right">{{'(' + selectedUnit.unit + ')'}}</div>
       </h5>
       <h3 v-else>単位未選択</h3>
       <v-spacer></v-spacer>
       <h3>{{ convertedResult }}</h3>
       <v-row class="ma-2" justify="end">
-        <v-dialog v-model="$store.state.convert.dialog" scrollable max-width="800px" :fullscreen="$vuetify.breakpoint.xs">
+        <v-dialog v-model="selectUnitDialog" scrollable max-width="800px" :fullscreen="$vuetify.breakpoint.xs">
           <template v-slot:activator="{ on }">
-            <v-btn small outlined right v-on="on" @click="$store.commit('convert/openDialog');">選ぶ</v-btn>
+            <v-btn small outlined right v-on="on" @click="selectUnitDialog = true;">選ぶ</v-btn>
           </template>
           <v-card>
             <v-card-title>単位を選択してください</v-card-title>
             <v-divider></v-divider>
             <v-card-text style="height: 300px;">
-              <UnitList/>
+              <UnitList v-on:unit="setUnit"/>
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
-              <v-btn color="blue darken-1" text @click="$store.commit('convert/closeDialog');" >閉じる</v-btn>
+              <v-btn color="blue darken-1" text @click="selectUnitDialog = false;" >閉じる</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -208,6 +208,7 @@
 
 <script>
 import UnitList from "~/components/UnitList.vue";
+
 export default {
   head: {
     htmlAttrs:{
@@ -219,8 +220,9 @@ export default {
   },
   data() {
     return {
-      selectUnitdialog: false,
+      selectUnitDialog: false,
       fomula: '',
+      selectedUnit: null,
       calculatedResult: '',
       convertedResult: '',
       errorMessage: null
@@ -239,13 +241,11 @@ export default {
       return parsedFomula;
     },
     calculate: function() {
-      console.log(this.windowHeight);
       try {
         if (this.fomula !== '') {
          const parsedFomula = this.parseFomula(this.fomula);
           this.calculatedResult = eval(parsedFomula); 
         }
-
         if (!isFinite(this.calculatedResult)) {
           throw 'InfinityError';
         }
@@ -253,12 +253,11 @@ export default {
           throw 'NaNError';
         }
 
-        this.$store.commit('convert/convertUnit',this.calculatedResult);
-        this.convertedResult = this.$store.state.convert.result;
+        this.convert();
       
         let convertTo = null;
-        if (this.$store.state.convert.selectedUnit !== null) {
-          convertTo = this.$store.state.convert.selectedUnit.name;
+        if (this.selectedUnit !== null) {
+          convertTo = this.selectedUnit.name;
         }
 
         const historyObj = { 
@@ -275,6 +274,37 @@ export default {
         this.fomula='エラー';
       }
     },
+    convert: function() {
+      try {
+        const perUnit = this.selectedUnit.perUnit;
+        const convertPrerequisite = perUnit !== null || perUnit !== undefined || this.calculatedResult !== '' ;
+        if ( !convertPrerequisite ) {
+          this.convertedResult = '';
+          return ;
+        } 
+
+        let result = null;
+        if (this.selectedUnit.unit === '連続試行') {
+          /* Calculate x of 'unit^x = target'  */
+          result = Math.round(Math.log(this.calculatedResult)/Math.log(perUnit)*100) /100;
+        } else {
+          result = Math.round(this.calculatedResult/perUnit*100) / 100;
+        }
+
+        if (!isFinite(result)) {
+          throw 'InfinityError in convert';
+        } 
+        if (isNaN(result)) {
+          throw 'NaNError in convert';
+        }
+
+        this.convertedResult = result;
+      }
+      catch (e) {
+        console.error(e);
+        this.convertedResult = '';
+      }
+    },
     backSpace: function() {
       this.fomula = this.fomula.slice(0,-1);
     },
@@ -282,6 +312,10 @@ export default {
       this.fomula='';
       this.calculatedResult = '';
       this.convertedResult = '';
+    },
+    setUnit: function(item) {
+      this.selectedUnit = item;
+      this.selectUnitDialog = false;
     }
   },
   watch: {
