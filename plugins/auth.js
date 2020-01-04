@@ -1,5 +1,6 @@
-
-import firebase from '~/plugins/firebase'
+import firebase from '~/plugins/firebase.js'
+import 'firebase/app'
+import 'firebase/auth'
 
 function auth() {
   return new Promise((resolve, reject) => {
