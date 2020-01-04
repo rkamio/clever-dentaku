@@ -7,7 +7,7 @@ cache:
 script:
 - 'npm run build'
 - 'npm run test'
-- 'ls -alh'
+- 'ls -alh dist/'
 branches:
   only:
   - master
