@@ -13,6 +13,9 @@ const config = {
   measurementId: process.env.measurementId
 }
 
+console.log(process.env.projectId);
+console.log("config",config)
+
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
 }
