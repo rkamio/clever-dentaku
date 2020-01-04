@@ -50,7 +50,7 @@
       return {
         page: 1,
         pageCount: 0,
-        itemsPerPage: parseInt(process.env.USER_FAV_MAX),
+        itemsPerPage: parseInt(process.env.NUXT_ENV_USER_FAV_MAX),
         loading: true,
         search: '',
         headers: [

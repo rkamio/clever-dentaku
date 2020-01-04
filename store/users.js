@@ -110,7 +110,7 @@ export const actions = {
     }
 
     /* unitsとusersの整合性をとる (Aがunitをdeleteしたが、Bがお気に入り登録している場合) */
-    if (state.favorites.length >= process.env.USER_FAV_MAX) {
+    if (state.favorites.length >= process.env.NUXT_ENV_USER_FAV_MAX) {
       for (let i=0;i<state.favorites.length;i++) {
         const doc = await db.collection('units').doc(state.favorites[i]).get();
         if (!doc.exists) {
@@ -121,7 +121,7 @@ export const actions = {
     }
 
     /* お気に入り数上限チェック */
-    if (state.favorites.length >= process.env.USER_FAV_MAX) {
+    if (state.favorites.length >= process.env.NUXT_ENV_USER_FAV_MAX) {
       throw 'FavoriteCountExceedException';
     }
 
