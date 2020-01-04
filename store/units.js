@@ -13,6 +13,6 @@ export const mutations = {
 export const actions = {
   async loadUnits({ commit }) {
     let docRef = await db.collection('units').get();
-    console.log(docRef);
+    // console.log(docRef);
   },
 }

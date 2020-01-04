@@ -67,7 +67,7 @@
       }
     },
     created() {
-      console.log("created UnitList.");
+      // console.log("created UnitList.");
       this.loadUnits();
       
     },
@@ -84,8 +84,8 @@
               unitData["isFavorite"] = favorites.indexOf(doc.id) > -1 ? true : false ; 
               this.units.push(unitData);
             })
-            console.log("loadUnits success.");
-            console.log(this.units);
+            // console.log("loadUnits success.");
+            // console.log(this.units);
             this.loading = false ;
           })
           .catch((err)=>{
@@ -109,7 +109,7 @@
         } else {
           this.$store.dispatch('users/addFavorite',item)
             .then(result => {
-              console.log('success');
+              // console.log('success');
             })
             .catch(error => {
               if (error === 'FavoriteCountExceedException') {

@@ -84,19 +84,19 @@ export default {
     };
   },
   mounted() {
-    console.log("mouted run");
+    // console.log("mouted run");
     this.loadFavorites();
   },
   computed: {
     favoritesId() {
-      console.log("computed run")
+      // console.log("computed run")
       return this.$store.state.users.favorites;
     }
   },
   watch: {
     async favoritesId(val) {
-      console.log("watch run",val)
-      console.log("wathc run this.favorite",this.favorites);
+      // console.log("watch run",val)
+      // console.log("wathc run this.favorite",this.favorites);
       if (!this.$store.state.users.isAuthorized) {
         return ;
       }

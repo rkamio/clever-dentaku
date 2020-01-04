@@ -1,6 +1,13 @@
 # clever-dentaku
 
-> My tiptop Nuxt.js project
+> clever-dentaku Nuxt.js project
+
+## Before Deploy
+``` bash
+# If .env changed, Delete env: global: in .travis.yml and then
+$ cat .env | travis encrypt -r rkamio/clever-dentaku --split --add
+
+```
 
 ## Build Setup
 

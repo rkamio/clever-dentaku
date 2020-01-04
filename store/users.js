@@ -64,7 +64,7 @@ export const actions = {
         dispatch('userCheck');
       } else {
         commit('clearUser');
-        console.log('Cleared Successfully.')
+        // console.log('Cleared Successfully.')
       }
     })
   },
@@ -76,7 +76,7 @@ export const actions = {
           privateUnits: doc.data().privateUnits
          });
       } else {
-        console.log("No such document!");
+        // console.log("No such document!");
         dispatch('createUser');
       }
     }).catch((error) => {
@@ -92,7 +92,7 @@ export const actions = {
       privateUnits: [],
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => {
-      console.log("Document successfully written!");
+      // console.log("Document successfully written!");
     }).catch((error) => {
       console.error("Error writing document: ", error);
     })
@@ -135,7 +135,7 @@ export const actions = {
       });
     })
     commit('addFavorite',unitId);
-    console.log('addFavorite Done')
+    // console.log('addFavorite Done')
   },
   async cancelFavorite ({ commit, state },{ unitId }) {
 
@@ -159,7 +159,7 @@ export const actions = {
       });
     })
     commit('removeFavorite',unitId);
-    console.log('cancelFavorite Done.')
+    // console.log('cancelFavorite Done.')
   },
   async removeFavorite({ commit, state },{ unitId }) {
     const userDocRef = db.collection('users').doc(state.uid);
@@ -175,6 +175,6 @@ export const actions = {
     })
     
     commit('removeFavorite',unitId);
-    console.log('removeFavorite Done.')
+    // console.log('removeFavorite Done.')
   }
 }
