@@ -1,7 +1,7 @@
 import firebase from "firebase/app"
 import 'firebase/app'
 
-// .env に設定した値を取得してる
+// .env に設定した値を取得
 const config = {
   apiKey: process.env.apiKey,
   authDomain: process.env.authDomain,
@@ -13,8 +13,7 @@ const config = {
   measurementId: process.env.measurementId
 }
 
-console.log(process.env.projectId);
-console.log("config",config)
+console.log(process.env.BASE_URL);
 
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
