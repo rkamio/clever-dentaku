@@ -1,0 +1,39 @@
+[
+    {
+        "email":"hogehoge@test.com",
+        "displayName":"hogehoge",
+        "photoURL":"https://www.google.com",
+        "favorites":[],
+        "privateUnits":[],
+        "createdAt":"2019-12-31 10:00:00"
+    },
+    {
+        "email":"bazbaz@test.com",
+        "displayName":"bazbaz",
+        "favorites":["/units/jenojfm","/units/iowefmorvm"],
+        "privateUnits":[
+            {
+                "name": "プライベート１",
+                "perUnit":46.755,
+                "unit":"平方メートル",
+                "category": "面積",
+                "favoriteCount": 0,
+                "createdBy":"/users/bazbaz",
+                "createdAt":"2019-12-31 10:00:00",
+                "updatedAt":"2019-12-31 10:00:00"
+          },
+          {
+            "name": "プライベート２",
+            "perUnit":46.755,
+            "unit":"平方メートル",
+            "category": "面積",
+            "favoriteCount": 1,
+            "createdBy":"/users/bazbaz",
+            "createdAt":"2019-12-31 10:00:00",
+            "updatedAt":"2019-12-31 10:00:00"
+          }
+        ],
+        "photoURL":"https://www.yahoo.co.jp",
+        "createdAt":"2019-12-31 10:00:00"
+    }
+]

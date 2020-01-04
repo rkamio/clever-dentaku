@@ -88,3 +88,7 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# DB useful files
+utils/serviceAccountKey.json
+utils/__pycache__

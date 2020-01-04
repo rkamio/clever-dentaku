@@ -2,11 +2,11 @@
   <v-app dark>
     <v-app-bar fixed app v-if="!$vuetify.breakpoint.xs">
       <v-toolbar-title>
-        <h2 class="white--text font-weight-bold">電卓</h2>
+        <h2 class="white--text font-weight-bold" @click="$router.push('/')">電卓</h2>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn small icon>
-        <v-icon>mdi-account-circle</v-icon>
+        <v-icon @click="$router.push('/users')">mdi-account-circle</v-icon>
       </v-btn>
       <v-app-bar-nav-icon v-if="!$vuetify.breakpoint.xs" @click.stop="rightDrawer = !rightDrawer"></v-app-bar-nav-icon>
     </v-app-bar>
@@ -46,7 +46,7 @@
         <span>履歴</span>
         <v-icon>mdi-history</v-icon>
       </v-btn>
-      <v-btn @click="$router.push('/users/')">
+      <v-btn @click="$router.push('/users')">
         <span>その他</span>
         <v-icon>mdi-account</v-icon>
       </v-btn>
@@ -62,6 +62,9 @@ import OperationHistoryList from "~/components/OperationHistoryList.vue"
 const pathList = {"index":0,"operation-history":1,"users":2}
 
 export default {
+  mounted() {
+    this.$store.dispatch('users/googleAuthStateChanged');
+  },
   data () {
     return {
       activeBtn:pathList[this.$route.name],
